@@ -60,7 +60,7 @@ function translateDockerTag() {
   if hasCustomTag; then
     TAG=$(echo ${INPUT_NAME} | cut -d':' -f2)
     INPUT_NAME=$(echo ${INPUT_NAME} | cut -d':' -f1)
-  elif ${INPUT_TAG_NAME} then
+  elif [ "${INPUT_TAG_NAME}" != "" ] then
     TAG=${INPUT_TAG_NAME}
   elif isOnMaster; then
     TAG="latest"

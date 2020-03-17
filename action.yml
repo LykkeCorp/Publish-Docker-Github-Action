@@ -35,6 +35,9 @@ inputs:
   tag_names:
     description: 'Use tag_names when you want to push tags/release by their git name'
     required: false
+  tag_name_skip:
+    description: 'Use tag_name_skip together with tag_names when you want to push tags/release by their git name and skip part or tag name'
+    required: false
 outputs:
   tag:
     description: 'Is the tag, which was pushed'

@@ -7,6 +7,7 @@ function main() {
   sanitize "${INPUT_NAME}" "name"
   sanitize "${INPUT_USERNAME}" "username"
   sanitize "${INPUT_PASSWORD}" "password"
+  sanitize "${INPUT_TAG}" "tag_name"
 
   REGISTRY_NO_PROTOCOL=$(echo "${INPUT_REGISTRY}" | sed -e 's/^https:\/\///g')
   if uses "${INPUT_REGISTRY}" && ! isPartOfTheName "${REGISTRY_NO_PROTOCOL}"; then
@@ -60,6 +61,8 @@ function translateDockerTag() {
   if hasCustomTag; then
     TAG=$(echo ${INPUT_NAME} | cut -d':' -f2)
     INPUT_NAME=$(echo ${INPUT_NAME} | cut -d':' -f1)
+  elif ${INPUT_TAG} then
+    TAG=${INPUT_TAG}
   elif isOnMaster; then
     TAG="latest"
   elif isGitTag && usesBoolean "${INPUT_TAG_NAMES}"; then

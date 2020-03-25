@@ -16,10 +16,10 @@ function main() {
   translateDockerTag
   DOCKERNAME="${INPUT_NAME}:${TAG}"
 
-  echo "hello world"
   
   if uses "${INPUT_WORKDIR}"; then
     ls
+    echo "hello world"
     changeWorkingDirectory
   fi
 

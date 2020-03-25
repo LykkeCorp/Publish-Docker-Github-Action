@@ -17,6 +17,7 @@ function main() {
   DOCKERNAME="${INPUT_NAME}:${TAG}"
 
   if uses "${INPUT_WORKDIR}"; then
+    ls
     changeWorkingDirectory
   fi
 

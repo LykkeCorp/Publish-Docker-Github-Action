@@ -7,6 +7,7 @@ function main() {
   sanitize "${INPUT_NAME}" "name"
   sanitize "${INPUT_USERNAME}" "username"
   sanitize "${INPUT_PASSWORD}" "password"
+  sanitize "${INPUT_PLATFORM}" "platform"
 
   REGISTRY_NO_PROTOCOL=$(echo "${INPUT_REGISTRY}" | sed -e 's/^https:\/\///g')
   if uses "${INPUT_REGISTRY}" && ! isPartOfTheName "${REGISTRY_NO_PROTOCOL}"; then
@@ -33,6 +34,11 @@ function main() {
   if uses "${INPUT_BUILDARGS}"; then
     addBuildArgs
   fi
+
+  if uses "${INPUT_PLATFORM}"; then
+    addPlatform
+  fi
+ 
   if usesBoolean "${INPUT_CACHE}"; then
     useBuildCache
   fi
@@ -111,6 +117,10 @@ function useBuildCache() {
   if docker pull ${DOCKERNAME} 2>/dev/null; then
     BUILDPARAMS="$BUILDPARAMS --cache-from ${DOCKERNAME}"
   fi
+}
+
+function usePlatform() {
+    BUILDPARAMS="$BUILDPARAMS --platform ${INPUT_PLATFORM}"
 }
 
 function uses() {

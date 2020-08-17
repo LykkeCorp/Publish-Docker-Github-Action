@@ -7,7 +7,7 @@ function main() {
   sanitize "${INPUT_NAME}" "name"
   sanitize "${INPUT_USERNAME}" "username"
   sanitize "${INPUT_PASSWORD}" "password"
-  sanitize "${INPUT_PLATFORM}" "platform"
+  #sanitize "${INPUT_PLATFORM}" "platform"
 
   REGISTRY_NO_PROTOCOL=$(echo "${INPUT_REGISTRY}" | sed -e 's/^https:\/\///g')
   if uses "${INPUT_REGISTRY}" && ! isPartOfTheName "${REGISTRY_NO_PROTOCOL}"; then
@@ -35,9 +35,9 @@ function main() {
     addBuildArgs
   fi
 
-  if uses "${INPUT_PLATFORM}"; then
-    addPlatform
-  fi
+ # if uses "${INPUT_PLATFORM}"; then
+ #   addPlatform
+ # fi
  
   if usesBoolean "${INPUT_CACHE}"; then
     useBuildCache
@@ -119,9 +119,9 @@ function useBuildCache() {
   fi
 }
 
-function usePlatform() {
-    BUILDPARAMS="$BUILDPARAMS --platform ${INPUT_PLATFORM}"
-}
+#function usePlatform() {
+#    BUILDPARAMS="$BUILDPARAMS --platform ${INPUT_PLATFORM}"
+#}
 
 function uses() {
   [ ! -z "${1}" ]

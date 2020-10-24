@@ -69,6 +69,8 @@ function translateDockerTag() {
   if hasCustomTag; then
     TAG=$(echo ${INPUT_NAME} | cut -d':' -f2)
     INPUT_NAME=$(echo ${INPUT_NAME} | cut -d':' -f1)
+  elif uses "${INPUT_BUILD_NUMBER_PREFIX}"; then
+    TAG="${INPUT_BUILD_NUMBER_PREFIX}.${INPUT_BUILD_NUMBER}"
   elif isOnMaster; then
     TAG="latest"
   elif isGitTag && usesBoolean "${INPUT_TAG_NAMES}"; then    
